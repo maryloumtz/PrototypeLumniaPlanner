@@ -1,40 +1,42 @@
-# PrototypeLumniaPlanner
+# Lumniaproto
 
-Configuration d'environnement pour Angular 20 + Angular Material + Tailwind CSS.
+Prototype Lumnia (Angular 20 + Angular Material + Tailwind CSS).
 
-## Prerequis
+## Environnement de travail
 - Node.js compatible Angular 20 (versions prises en charge: ^20.19.0, ^22.12.0 ou ^24.0.0).
 - npm (fourni avec Node.js).
 
-## Setup rapide (nouveau projet)
+Si vous utilisez nvm:
 ```bash
-# 1) Installer Node.js compatible (ex: via nvm)
 nvm install
 nvm use
+```
 
-# 2) Installer Angular CLI (global)
-npm install -g @angular/cli
+## Installation
+```bash
+npm install
+```
 
-# 3) Creer le projet
-ng new lumnia-planner --style=css --routing
-cd lumnia-planner
-
-# 4) Ajouter Angular Material
-ng add @angular/material
-
-# 5) Ajouter Tailwind CSS (automatique via Angular CLI)
-ng add tailwindcss
-
-# 6) Lancer l'app
+## Lancer l'app
+```bash
 ng serve
 ```
 
-## Setup dans un projet existant
+Puis ouvrir `http://localhost:4200/`.
+
+## Generer du code
 ```bash
-npm install
-ng add @angular/material
-ng add tailwindcss
-ng serve
+ng generate component component-name
+```
+
+## Build
+```bash
+ng build
+```
+
+## Tests
+```bash
+ng test
 ```
 
 ## Fichiers de config a partager (GitHub)
@@ -44,6 +46,5 @@ ng serve
 - `.vscode/settings.json` : preferences d'atelier (format, lint, etc.).
 
 ## Notes
-- Angular 20 requiert une version Node.js supportee (ex: ^20.19.0, ^22.12.0, ^24.0.0).
-- Tailwind CSS peut etre installe via `ng add tailwindcss` (configuration automatique).
-- Angular Material s'installe via `ng add @angular/material`.
+- Angular Material installe et configure.
+- Tailwind CSS installe et configure.
