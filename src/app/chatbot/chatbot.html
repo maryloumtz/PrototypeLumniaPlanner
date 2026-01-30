@@ -1,0 +1,40 @@
+<div class="screen">
+  <div class="content">
+    <header class="header">
+      <h1>Chatbot</h1>
+      <p>Simule une conversation pour montrer ce que l'app peut faire.</p>
+    </header>
+
+    <section class="card chat-card">
+      <div class="card-title">Conversation</div>
+      <div class="messages">
+        <div
+          *ngFor="let message of messages"
+          class="bubble"
+          [class.user]="message.role === 'user'"
+          [class.bot]="message.role === 'bot'"
+        >
+          {{ message.text }}
+        </div>
+      </div>
+
+      <div class="suggestions">
+        <button class="chip" *ngFor="let item of suggestions" (click)="sendMessage(item)">
+          {{ item }}
+        </button>
+      </div>
+
+      <div class="composer">
+        <input
+          type="text"
+          placeholder="Ecris un message..."
+          [(ngModel)]="prompt"
+          (keydown.enter)="sendMessage()"
+        />
+        <button class="cta" (click)="sendMessage()">Envoyer</button>
+      </div>
+    </section>
+  </div>
+
+  <app-bottom-nav></app-bottom-nav>
+</div>

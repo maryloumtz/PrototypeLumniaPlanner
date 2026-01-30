@@ -1,0 +1,272 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #f7fbff 0%, #e8f0ff 35%, #f6f7ff 100%);
+  color: #1b2a3a;
+}
+
+.home-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content {
+  width: min(100%, 460px);
+  padding: 24px 20px 120px;
+  display: grid;
+  gap: 16px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3b5cff, #8fb2ff);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 22px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(59, 92, 255, 0.25);
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.brand-sub {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7c8a9f;
+}
+
+.avatar-link {
+  text-decoration: none;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #d7e3ff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #526385;
+  box-shadow: 0 8px 18px rgba(82, 99, 133, 0.18);
+}
+
+.greeting h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.greeting h1 span {
+  color: #3b5cff;
+}
+
+.greeting p {
+  margin: 6px 0 0;
+  color: #6d7a90;
+  font-size: 13px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: 0 16px 30px rgba(55, 86, 146, 0.14);
+  display: grid;
+  gap: 12px;
+}
+
+.card-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #7c8aa2;
+}
+
+.energy-card {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.energy-value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.energy-state {
+  font-size: 13px;
+  color: #6a7a93;
+}
+
+.energy-ring {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  background: conic-gradient(#5b7cff var(--progress), #dfe9ff 0);
+  display: grid;
+  place-items: center;
+}
+
+.ring-center {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #f7faff;
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 6px #eef3ff;
+}
+
+.ring-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: #5b7cff;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.objective-card {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 14px;
+}
+
+.objective-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #eef4ff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #5b78b8;
+}
+
+.objective-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.meal-card {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.meal-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.meal-sub {
+  color: #7b889e;
+  font-size: 12px;
+}
+
+.meal-time {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2c44;
+}
+
+.meal-plate {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffe8c7 0%, #f9caa0 45%, #f7b07b 100%);
+  box-shadow: inset 0 0 0 8px #f4f7ff;
+}
+
+.quick-card {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+}
+
+.quick-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #e9f1ff;
+  color: #4d6cd6;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.quick-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.assistant-card {
+  background: linear-gradient(135deg, #d6e6ff, #eef5ff);
+  border-radius: 24px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.assistant-bot {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, #cfe0ff 70%);
+  box-shadow: inset 0 0 0 6px #e7f0ff;
+}
+
+.assistant-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.assistant-text {
+  font-size: 12px;
+  color: #66748c;
+}
+
+.assistant-cta {
+  border: none;
+  background: #3b5cff;
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (min-width: 720px) {
+  .content {
+    padding: 36px 28px 140px;
+  }
+
+  .greeting h1 {
+    font-size: 28px;
+  }
+}

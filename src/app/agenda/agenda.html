@@ -302,33 +302,7 @@
     </section>
   </main>
 
-  <!-- BOTTOM NAV: app sections -->
-  <nav class="bottom-nav">
-    <button class="nav-item">
-      <mat-icon>home</mat-icon>
-      <span>Accueil</span>
-    </button>
-
-    <button class="nav-item is-active">
-      <mat-icon>event_note</mat-icon>
-      <span>Agenda</span>
-    </button>
-
-    <button class="nav-item">
-      <mat-icon>restaurant</mat-icon>
-      <span>Repas</span>
-    </button>
-
-    <button class="nav-item">
-      <mat-icon>fitness_center</mat-icon>
-      <span>Sport</span>
-    </button>
-
-    <button class="nav-item">
-      <mat-icon>checklist</mat-icon>
-      <span>Toalte</span>
-    </button>
-  </nav>
+  <app-bottom-nav></app-bottom-nav>
 
   <!-- Mascotte flottante + bulle (style pop, non intrusive) -->
   <div class="mascot-float" *ngIf="isMascotOpen">
