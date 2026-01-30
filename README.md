@@ -34,6 +34,16 @@ ng generate component component-name
 ng build
 ```
 
+## Publier sur GitHub Pages
+1. Verifiez que le nom du depot correspond a la base dans `package.json` (`build:gh-pages`).
+   - Si votre depot change, remplacez `/PrototypeLumniaPlanner/` par `/<votre-repo>/`.
+2. Lancez le build GitHub Pages:
+```bash
+npm run build:gh-pages
+```
+3. Dans GitHub, activez **Settings > Pages** puis selectionnez **GitHub Actions** comme source.
+4. La GitHub Action `Deploy to GitHub Pages` publiera automatiquement le site a chaque push sur `main`.
+
 ## Tests
 ```bash
 ng test
