@@ -1,1 +1,427 @@
-<p>agenda fonctionne</p>
+<!-- agenda.component.html -->
+<!-- Page layout for Agenda: header, filters, content, bottom nav, and modal -->
+
+<link rel="stylesheet" href="agenda.css" />
+
+<div class="agenda-page" [ngClass]="view">
+  <!-- HEADER: title + actions + filters -->
+  <header class="agenda-header">
+    <div class="agenda-title-row">
+      <div class="agenda-title-group">
+        <h1 class="agenda-title">Agenda</h1>
+        <button
+          class="agenda-add-btn"
+          mat-icon-button
+          aria-label="Ajouter un évènement"
+          (click)="openAdd()"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <button mat-icon-button class="agenda-search-btn" aria-label="Rechercher">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <!-- View tabs -->
+    <div class="calendar-filter" role="tablist" aria-label="Filtres agenda">
+      <button
+        class="filter-item"
+        role="tab"
+        [class.is-active]="view === 'today'"
+        [attr.aria-selected]="view === 'today'"
+        (click)="setView('today')"
+        type="button"
+      >
+        Aujourd'hui
+      </button>
+      <button
+        class="filter-item"
+        role="tab"
+        [class.is-active]="view === 'days'"
+        [attr.aria-selected]="view === 'days'"
+        (click)="setView('days')"
+        type="button"
+      >
+        Jours
+      </button>
+      <button
+        class="filter-item"
+        role="tab"
+        [class.is-active]="view === 'months'"
+        [attr.aria-selected]="view === 'months'"
+        (click)="setView('months')"
+        type="button"
+      >
+        Mois
+      </button>
+    </div>
+
+    <!-- Date strip for "Jours" view (horizontal list of days) -->
+    <div class="date-strip" *ngIf="view === 'days'">
+      <button
+        class="date-pill"
+        type="button"
+        *ngFor="let day of dayPills"
+        [class.is-active]="day.value === selectedDay"
+        (click)="scrollToDay(day.value)"
+      >
+        <div class="date-pill-top">{{ day.label }}</div>
+        <div class="date-pill-mid">{{ day.value }}</div>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="agenda-content">
+    <!-- "Aujourd'hui" view: fixed day pill + events list below -->
+    <div class="day-fixed" *ngIf="view === 'today'">
+      <button class="day-panel-pill is-selected" type="button">
+        <div class="date-pill-top">{{ todayLabel }}</div>
+        <div class="date-pill-mid">{{ todayValue }}</div>
+      </button>
+    </div>
+    <!-- "Jours" view: swipe day panels; scroll updates selectedDay -->
+    <div class="day-snap" *ngIf="view === 'days'" (scroll)="onDayScroll($event)" #daySnap>
+      <section class="day-panel" *ngFor="let day of dayPills">
+        <button class="day-panel-pill" type="button" (click)="setSelectedDay(day.value)">
+          <div class="date-pill-top">{{ day.label }}</div>
+          <div class="date-pill-mid">{{ day.value }}</div>
+        </button>
+        <div class="events-list">
+          <article class="event-card">
+            <div class="event-left">
+              <div class="event-time">
+                <span>08:30</span>
+              </div>
+              <div class="event-meta">
+                <span class="event-tag">Lever</span>
+              </div>
+            </div>
+            <div class="event-right">
+              <div class="event-actions">
+                <button mat-icon-button class="event-action" aria-label="Options">
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+                <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="event-card">
+            <div class="event-left">
+              <div class="event-time">
+                <span>11:45</span> <span class="event-sep">-</span> <span>12:15</span>
+              </div>
+              <div class="event-meta">
+                <span class="event-tag">Midi avec Jacqueline</span>
+              </div>
+            </div>
+            <div class="event-right">
+              <div class="event-actions">
+                <button mat-icon-button class="event-action" aria-label="Options">
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+                <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="event-card is-clickable">
+            <div class="event-left">
+              <div class="event-time"><span>18:00</span></div>
+              <div class="event-meta">
+                <span class="event-tag">Covoiturage avec Maurice</span>
+              </div>
+            </div>
+            <div class="event-right">
+              <div class="event-actions">
+                <button mat-icon-button class="event-action" aria-label="Options">
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+                <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="event-card">
+            <div class="event-left">
+              <div class="event-time">
+                <span>22:00</span>
+              </div>
+              <div class="event-meta">
+                <span class="event-tag">Dormir</span>
+              </div>
+            </div>
+            <div class="event-right">
+              <div class="event-actions">
+                <button mat-icon-button class="event-action" aria-label="Options">
+                  <mat-icon>more_horiz</mat-icon>
+                </button>
+                <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+    <!-- "Mois" view: month navigation + calendar grid -->
+    <div class="month-nav" *ngIf="view === 'months'">
+      <button class="month-nav-btn" type="button" (click)="setMonth(-1)">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <div class="month-nav-title">{{ monthLabel }}</div>
+      <button class="month-nav-btn" type="button" (click)="setMonth(1)">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+    <div class="month-grid" *ngIf="view === 'months'">
+      <div class="month-head">
+        <span>LU</span>
+        <span>MA</span>
+        <span>ME</span>
+        <span>JE</span>
+        <span>VE</span>
+        <span>SA</span>
+        <span>DI</span>
+      </div>
+      <div class="month-days">
+        <button
+          class="month-day"
+          type="button"
+          *ngFor="let day of monthDays"
+          [class.has-day]="day"
+          [class.is-selected]="day === selectedDay"
+          (click)="setSelectedDay(day)"
+        >
+          <span *ngIf="day">{{ day }}</span>
+          <div class="month-dots" *ngIf="day && monthDots[day]">
+            <span
+              class="month-dot"
+              *ngFor="let dot of [1, 2, 3] | slice: 0 : monthDots[day]"
+            ></span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- Events header for selected day in month view -->
+    <div class="month-events-title" *ngIf="view === 'months'">
+      <span>Événements du {{ selectedDay }}</span>
+    </div>
+    <!-- Events list (shared sample content) -->
+    <section class="events-list">
+      <article class="event-card">
+        <div class="event-left">
+          <div class="event-time">
+            <span>08:30</span>
+          </div>
+          <div class="event-meta">
+            <span class="event-tag">Lever</span>
+          </div>
+        </div>
+        <div class="event-right">
+          <div class="event-actions">
+            <button mat-icon-button class="event-action" aria-label="Options">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-card">
+        <div class="event-left">
+          <div class="event-time">
+            <span>11:45</span> <span class="event-sep">-</span> <span>12:15</span>
+          </div>
+          <div class="event-meta">
+            <span class="event-tag">Midi avec Jacqueline</span>
+          </div>
+        </div>
+        <div class="event-right">
+          <div class="event-actions">
+            <button mat-icon-button class="event-action" aria-label="Options">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-card is-clickable">
+        <div class="event-left">
+          <div class="event-time"><span>18:00</span></div>
+          <div class="event-meta">
+            <span class="event-tag">Covoiturage avec Maurice</span>
+          </div>
+        </div>
+        <div class="event-right">
+          <div class="event-actions">
+            <button mat-icon-button class="event-action" aria-label="Options">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="event-card">
+        <div class="event-left">
+          <div class="event-time">
+            <span>22:00</span>
+          </div>
+          <div class="event-meta">
+            <span class="event-tag">Dormir</span>
+          </div>
+        </div>
+        <div class="event-right">
+          <div class="event-actions">
+            <button mat-icon-button class="event-action" aria-label="Options">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <button mat-icon-button class="event-action is-danger" aria-label="Supprimer">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- BOTTOM NAV: app sections -->
+  <nav class="bottom-nav">
+    <button class="nav-item">
+      <mat-icon>home</mat-icon>
+      <span>Accueil</span>
+    </button>
+
+    <button class="nav-item is-active">
+      <mat-icon>event_note</mat-icon>
+      <span>Agenda</span>
+    </button>
+
+    <button class="nav-item">
+      <mat-icon>restaurant</mat-icon>
+      <span>Repas</span>
+    </button>
+
+    <button class="nav-item">
+      <mat-icon>fitness_center</mat-icon>
+      <span>Sport</span>
+    </button>
+
+    <button class="nav-item">
+      <mat-icon>checklist</mat-icon>
+      <span>Toalte</span>
+    </button>
+  </nav>
+
+  <!-- Mascotte flottante + bulle (style pop, non intrusive) -->
+  <div class="mascot-float" *ngIf="isMascotOpen">
+    <div class="mascot-bubble-float" (click)="openChatbot()">
+      <div class="mascot-bubble-title">Salut !</div>
+      <div class="mascot-bubble-sub">Ajoute ton prochain évènement ✨</div>
+    </div>
+    <button class="mascot-float-btn" type="button" (click)="openChatbot()">
+      <img class="mascot-float-img" src="/img/Calendou.png" alt="Calendou" />
+    </button>
+  </div>
+
+  <!-- Add event modal -->
+  <div class="modal-backdrop" *ngIf="isAddOpen" (click)="closeAdd()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">Ajouter un événement</div>
+        <button class="modal-close" mat-icon-button type="button" (click)="closeAdd()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <form class="modal-form" (ngSubmit)="submitAdd()">
+        <label class="field">
+          <span>Titre</span>
+          <input
+            type="text"
+            placeholder="Ex: Réunion, Sport..."
+            [(ngModel)]="newEventTitle"
+            name="title"
+          />
+        </label>
+
+        <label class="field">
+          <span>Type d'évènement</span>
+          <select [(ngModel)]="newEventType" name="type">
+            <option value="" disabled>Sélectionner un type</option>
+            <option value="rdv">Rendez-vous</option>
+            <option value="sport">Sport</option>
+            <option value="repas">Repas</option>
+            <option value="travail">Travail</option>
+            <option value="autre">Autre</option>
+          </select>
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Début (date)</span>
+            <input type="date" [(ngModel)]="newEventStartDate" name="startDate" />
+          </label>
+          <label class="field">
+            <span>Début (heure)</span>
+            <input type="time" [(ngModel)]="newEventStartTime" name="startTime" />
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Fin (date)</span>
+            <input type="date" [(ngModel)]="newEventEndDate" name="endDate" />
+          </label>
+          <label class="field">
+            <span>Fin (heure)</span>
+            <input type="time" [(ngModel)]="newEventEndTime" name="endTime" />
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Description</span>
+          <textarea
+            rows="3"
+            placeholder="Ajouter un détail..."
+            [(ngModel)]="newEventDescription"
+            name="description"
+          ></textarea>
+        </label>
+
+        <label class="field">
+          <span>Récurrence</span>
+          <select [(ngModel)]="newEventRecurrence" name="recurrence">
+            <option value="none">Ponctuel (une seule fois)</option>
+            <option value="daily">Tous les jours</option>
+            <option value="weekly">Toutes les semaines</option>
+            <option value="monthly">Tous les mois</option>
+            <option value="range">Plusieurs jours (plage de dates)</option>
+          </select>
+        </label>
+
+        <div class="modal-actions">
+          <button class="btn-ghost" type="button" (click)="closeAdd()">Annuler</button>
+          <button class="btn-primary" type="submit">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
