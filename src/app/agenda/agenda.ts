@@ -2,17 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { BottomNav } from '../bottom-nav/bottom-nav';
 
 type AgendaView = 'today' | 'days' | 'months';
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-calendrier',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatIconModule],
+  imports: [BottomNav, CommonModule, FormsModule, MatIconModule],
   templateUrl: './agenda.html',
   styleUrl: './agenda.css',
 })
-export class Agenda {
+export class Calendrier {
   view: AgendaView = 'today';
   selectedDay = 24;
   currentMonthOffset = 0;

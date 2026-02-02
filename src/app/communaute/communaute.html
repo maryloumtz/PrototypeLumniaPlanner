@@ -1,0 +1,85 @@
+<div class="screen">
+  <div class="content">
+    <header class="header">
+      <h1>Communauté</h1>
+    </header>
+
+    <section class="tabs-card">
+      <div class="tabs">
+        <button
+          class="tab"
+          type="button"
+          [class.active]="activeTab === 'covoit'"
+          (click)="setTab('covoit')"
+        >
+          Covoiturage &amp; évènements
+        </button>
+        <button
+          class="tab"
+          type="button"
+          [class.active]="activeTab === 'discussion'"
+          (click)="setTab('discussion')"
+        >
+          Discussions
+        </button>
+      </div>
+
+      <div class="tab-panel" *ngIf="activeTab === 'covoit'">
+        <div class="card-title">Covoiturage</div>
+        <div class="map-card">
+          <div class="map-avatar a1"></div>
+          <div class="map-avatar a2"></div>
+          <div class="map-avatar a3"></div>
+          <div class="map-pin">+</div>
+        </div>
+        <div class="ride-card">
+          <div class="ride-title">Edgar</div>
+          <div class="ride-sub">Eglise &rarr; Montrouge</div>
+          <div class="ride-time">Depart a 19:30</div>
+          <button class="cta cta-ghost" type="button">Demander</button>
+        </div>
+        <div class="card-title">Sorties &amp; evenements</div>
+        <div class="event">
+          <div>
+            <div class="event-name">Yoga doux en plein air</div>
+            <div class="event-sub">Samedi 10:00</div>
+          </div>
+          <button class="cta">Participer</button>
+        </div>
+      </div>
+
+      <div class="tab-panel muted" *ngIf="activeTab === 'discussion'">
+        <div class="card-title">Discussion</div>
+        <div class="chat-list">
+          <div class="chat-item">
+            <div class="chat-avatar">S</div>
+            <div>
+              <div class="chat-name">Sophie</div>
+              <div class="chat-last">Tu viens toujours au cours demain ?</div>
+            </div>
+            <div class="chat-time">12:40</div>
+          </div>
+          <div class="chat-item">
+            <div class="chat-avatar alt">M</div>
+            <div>
+              <div class="chat-name">Maya</div>
+              <div class="chat-last">Merci pour le covoit, a bientot !</div>
+            </div>
+            <div class="chat-time">09:15</div>
+          </div>
+          <div class="chat-item">
+            <div class="chat-avatar alt2">L</div>
+            <div>
+              <div class="chat-name">Louise</div>
+              <div class="chat-last">On se retrouve a 18h a la salle ?</div>
+            </div>
+            <div class="chat-time">Hier</div>
+          </div>
+        </div>
+        <button class="cta cta-ghost" type="button">Ouvrir une discussion</button>
+      </div>
+    </section>
+  </div>
+
+  <app-bottom-nav></app-bottom-nav>
+</div>

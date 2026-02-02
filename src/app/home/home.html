@@ -1,1 +1,70 @@
-<p>home works!</p>
+<div class="home-screen">
+  <div class="content">
+    <header class="top-bar">
+      <div class="brand">
+        <span class="logo-mark">L</span>
+        <div>
+          <div class="brand-name">Lumnia</div>
+          <div class="brand-sub">Planner</div>
+        </div>
+      </div>
+      <a class="avatar-link" routerLink="/profil">
+        <span class="avatar">MC</span>
+      </a>
+    </header>
+
+    <section class="greeting">
+      <h1>Bonjour <span>Mathilde</span>,</h1>
+      <p>Organisons ta journee avec douceur.</p>
+    </section>
+
+    <section class="card energy-card">
+      <div class="energy-info">
+        <div class="card-title">Energie</div>
+        <div class="energy-value">60%</div>
+        <div class="energy-state">Normal</div>
+      </div>
+      <div class="energy-ring" style="--progress: 60%">
+        <div class="ring-center">
+          <div class="ring-icon">*</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card objective-card">
+      <div class="objective-icon">OK</div>
+      <div>
+        <div class="card-title">Objectif</div>
+        <div class="objective-text">Trouver du temps pour cuisiner ce soir</div>
+      </div>
+    </section>
+
+    <section class="card meal-card">
+      <div>
+        <div class="meal-title">Saumon</div>
+        <div class="meal-sub">Repas planifie</div>
+        <div class="meal-time">19:30</div>
+      </div>
+      <div class="meal-plate"></div>
+    </section>
+
+    <section class="card quick-card">
+      <div class="quick-icon">GO</div>
+      <div>
+        <div class="card-title">Ressource du jour</div>
+        <div class="quick-text">Lance une mini-session guidee de 5 min.</div>
+      </div>
+    </section>
+
+    <section class="assistant-card">
+      <div class="assistant-bot"></div>
+      <div>
+        <div class="assistant-title">On y va?</div>
+        <div class="assistant-text">Essayons de liberer un peu de temps pour tes activites.</div>
+      </div>
+      <button class="assistant-cta">Voir</button>
+    </section>
+  </div>
+
+  <app-bottom-nav></app-bottom-nav>
+</div>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      (function () {
+        const repoBase = '/PrototypeLumniaPlanner';
+        const l = window.location;
+        const path = l.pathname.replace(repoBase, '');
+        const redirectUrl =
+          l.origin +
+          repoBase +
+          '/?/' +
+          path.replace(/^\//, '') +
+          (l.search ? '&' + l.search.slice(1) : '') +
+          l.hash;
+        l.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirecting to the app…</p>
+  </body>
+</html>
